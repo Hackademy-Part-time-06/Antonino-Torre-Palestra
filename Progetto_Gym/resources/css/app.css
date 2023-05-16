@@ -1,0 +1,9 @@
+@import 'bootstrap';
+
+body{
+    background-color: rgb(168, 168, 168);
+}
+
+.margin-top{
+    margin-top: 60px;
+}
