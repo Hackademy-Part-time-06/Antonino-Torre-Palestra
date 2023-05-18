@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Infomail;
 
 class GymController extends Controller
 {
@@ -54,5 +56,23 @@ class GymController extends Controller
 
     public function contact(){
         return view('contact');
+    }
+
+    public function send(Request $richiesta){
+        $richiesta->validate([
+            'name'=>"required|string",
+            'email'=>"required|email",
+            'message'=>"required|min:10",
+        ]);
+
+        $data=[
+            'name'=>$richiesta->name,
+            'email'=>$richiesta->email,
+            'number'=>$richiesta->numberTelephon,
+            'message'=>$richiesta->message,
+        ];
+
+        mail::to($richiesta->input('email'))->send(new InfoMail($data));
+        return redirect()->route('home')->with('success', 'email inviata');
     }
 }

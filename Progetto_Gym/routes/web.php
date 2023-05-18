@@ -21,3 +21,5 @@ Route::get('/corse', [GymController::class, 'corse'])->name('corse');
 Route::get('/detail/{name}', [GymController::class, 'detail'])->name('detail');
 
 Route::get('/contact', [GymController::class, 'contact'])->name('contact');
+
+Route::post('/invia', [GymController::class, 'send'])->name('send');
